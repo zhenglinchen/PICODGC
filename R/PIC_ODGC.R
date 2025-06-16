@@ -14,7 +14,6 @@ library(ape)
 #' @export
 
 
-
 PIC_ODGC <- function(my_df,X,Y,my_tree,MAD_threshold,threshold.auto=TRUE){
   Y_vec <- my_df[,Y]
   X_vec <- my_df[,X]
@@ -28,8 +27,10 @@ PIC_ODGC <- function(my_df,X,Y,my_tree,MAD_threshold,threshold.auto=TRUE){
   PIC_Y_mad_max <- Count_Max_MAD(PIC_Y)
   PIC_X_mad_max <- Count_Max_MAD(PIC_X)
   
+  tips_num <- length(PIC_X)
+    
   if (threshold.auto){
-    MAD_threshold <- Get_Recommand_K(length(PIC_X))
+    MAD_threshold <- Get_Recommand_K(tips_num)
   }else{
     MAD_threshold <- MAD_threshold
   }
