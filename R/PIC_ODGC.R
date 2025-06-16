@@ -28,11 +28,14 @@ PIC_ODGC <- function(my_df,X,Y,my_tree,MAD_threshold,threshold.auto=TRUE){
   PIC_Y_mad_max <- Count_Max_MAD(PIC_Y)
   PIC_X_mad_max <- Count_Max_MAD(PIC_X)
   
+  tips_num <- length(PIC_X)
+    
   if (threshold.auto){
-    MAD_threshold <- Get_Recommand_K(length(PIC_X))
+    MAD_threshold <- Get_Recommand_K(tips_num)
   }else{
     MAD_threshold <- MAD_threshold
   }
+  
   
   if (tips_num <30){
     PIC_Y_normal_p <- shapiro.test(PIC_Y)$p.value
