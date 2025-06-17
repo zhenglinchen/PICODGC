@@ -19,6 +19,7 @@
 ```r
 # Development version
 remotes::install_github("zhenglinchen/PICODGC")
+library(PICODGC)
 
 ```
 ### Usage
