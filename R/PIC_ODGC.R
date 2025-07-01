@@ -35,6 +35,7 @@ PIC_ODGC <- function(my_df,X,Y,my_tree,MAD_threshold,threshold.auto=TRUE){
     MAD_threshold <- MAD_threshold
   }
   
+  
   if (tips_num <30){
     PIC_Y_normal_p <- shapiro.test(PIC_Y)$p.value
     PIC_X_normal_p <- shapiro.test(PIC_X)$p.value
@@ -43,17 +44,19 @@ PIC_ODGC <- function(my_df,X,Y,my_tree,MAD_threshold,threshold.auto=TRUE){
         PIC_Y_normal_p<0.05 | PIC_X_normal_p<0.05){
       PIC_ODGC_fit <- cor.test(PIC_Y,PIC_X,method="spearman")
     }else{
-      PIC_ODGC_fit <- cor.test(PIC_Y,PIC_X,method="pearson")
+      
+      PIC_ODGC_fit <- lm(PIC_Y~PIC_X-1)
     }
   }else{
     if (PIC_Y_mad_max > MAD_threshold | PIC_X_mad_max > MAD_threshold){
       PIC_ODGC_fit <- cor.test(PIC_Y,PIC_X,method="spearman")
     }else{
-      PIC_ODGC_fit <- cor.test(PIC_Y,PIC_X,method="pearson")
+      PIC_ODGC_fit <- lm(PIC_Y~PIC_X-1)
     }
   }
   
   return(PIC_ODGC_fit)
   
 }
+
 
