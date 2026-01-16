@@ -4,7 +4,7 @@
 \alias{PIC_ODGC}
 \title{PICODGC}
 \usage{
-PIC_ODGC(my_df, X, Y, my_tree, MAD_threshold, threshold.auto = TRUE)
+PIC_ODGC(my_df, X, Y, my_tree, IQR_threshold = 1.5)
 }
 \arguments{
 \item{my_df}{dataframe of traits}
@@ -15,9 +15,7 @@ PIC_ODGC(my_df, X, Y, my_tree, MAD_threshold, threshold.auto = TRUE)
 
 \item{my_tree}{phylogenetic tree}
 
-\item{MAD_threshold}{MAD threshold of outlier}
-
-\item{threshold.auto}{logical value, TRUE means using the estimated threshold automatically according to the sample size, if False, you can indicate MAD_threshold manually}
+\item{IQR_threshold}{IQR threshold of outlier}
 }
 \value{
 PICODGC model
