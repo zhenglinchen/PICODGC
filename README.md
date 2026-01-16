@@ -6,8 +6,7 @@
 ## 🔍 Features
 
 - `PIC_ODGC()`: Calculate trait correlations using PIC-ODGC method
-- `Get_Recommend_K()`: Infer K-value based on sample size
-- `Count_Max_MAD()`: Compute maximum absolute deviation of a vector
+- `CalculateIQR()`: This function calculates the distance of each data point from the nearest quartile boundary, expressed in units of the Interquartile Range (IQR). It returns a vector where each element indicates how many IQR units a data point deviates from either the first quartile (Q1) or third quartile (Q3), depending on its position relative to the interquartile range.
 
 
 ---
@@ -28,18 +27,16 @@ library(PICODGC)
 data("example_data")
 data("example_tree")
 
-# Calculate MAD for trait vectors
-Count_Max_MAD(example_data$X1)
-Count_Max_MAD(example_data$X2)
+# Calculate the distance of each data point from the nearest quartile boundary for trait vectors
+CalculateIQR(example_data$X1)
+CalculateIQR(example_data$X2)
 ```
 
-We can use PIC_ODGC only with traits data and phylogeny, and it will calculate the MAD_threshold inferred by sample size automatically.
+We can use PIC_ODGC only with traits data and phylogeny, and it will use 1.5xIQR as default.
 ```r
 # Run analysis with auto-detected threshold
 PIC_ODGC(example_data,"X1","X2",my_tree = example_tree)
 
-# View the automatically calculated threshold
-Get_Recommand_K(nrow(example_data))
 
 ```
 
@@ -48,8 +45,7 @@ To use a custom MAD threshold:
 ```r
 PIC_ODGC(example_data,"X1","X2",
   my_tree = example_tree,
-  MAD_threshold = 2, # User-defined threshold
-  threshold.auto = FALSE # Disable auto-calculation
+  IQR_threshold = 2
 )
 ```
 
